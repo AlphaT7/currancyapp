@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Federant&family=Open+Sans&display=swap');
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header,
+main,
+footer,
+section,
+div {
+    box-sizing: border-box;
+    font-family: "Open Sans";
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    background: #27be28;
+    background: #325632;
+    height: 150px;
+    color: #fff;
+
+    & section {
+        height: 50%;
+        display: flex;
+        align-items: center;
+    }
+
+    & section#appName {
+        padding-left: 50px;
+        font-size: 2em;
+        /* font-family: "Federant"; */
+        border-bottom: 1px solid #fff;
+    }
+
+    & section:nth-child(2) {
+        background: #7dd87e;
+        text-align: center;
+
+        .switch-button {
+            background: rgba(255, 255, 255, 0.56);
+            border-radius: 30px;
+            overflow: hidden;
+            width: 240px;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #145f14;
+            position: relative;
+            padding-right: 120px;
+            position: relative;
+        }
+
+        .switch-button:before {
+            content: "FX";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .switch-button-checkbox {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .switch-button-checkbox:checked+.switch-button-label:before {
+            transform: translateX(120px);
+            transition: transform 300ms linear;
+        }
+
+        .switch-button-checkbox+.switch-button-label {
+            position: relative;
+            padding: 15px 0;
+            display: block;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .switch-button-checkbox+.switch-button-label:before {
+            content: "";
+            background: #fff;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 30px;
+            transform: translateX(0);
+            transition: transform 300ms;
+        }
+
+        .switch-button-checkbox+.switch-button-label .switch-button-label-span {
+            position: relative;
+        }
+    }
+}
+
+main {
+    overflow: hidden;
+    display: flex;
+
+    & section#fx {
+        background: blue;
+        position: relative;
+        width: 100%;
+        transition-property: margin-left;
+        transition-duration: 0.3s;
+        margin-left: -100%;
+        flex-shrink: 0;
+    }
+
+    & section#crypto {
+        position: relative;
+        width: 100%;
+        transition-property: margin-left;
+        transition-duration: 0.3s;
+        flex-shrink: 0;
+
+        div.cryptoContainer {
+            width: 100%;
+            height: 75px;
+            border: 1px solid #7dd87e;
+            display: flex;
+
+            div {
+                padding-left: 15px;
+                text-align: left;
+                display: flex;
+                align-items: center;
+            }
+
+            div.cryptoIcon {
+                background: #535353;
+                justify-content: center;
+                padding: 0;
+                max-width: 100px;
+            }
+        }
+    }
+}
+
+.switchCurrency {
+    margin-left: 0 !important;
+    transition-property: margin-left;
+    transition-duration: 0.3s;
+}
