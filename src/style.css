@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Federant&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Open+Sans&display=swap');
 
 html,
 body {
@@ -22,10 +22,16 @@ div {
 }
 
 header {
-    background: #27be28;
     background: #325632;
+    background: #989998;
+    background: #555;
     height: 150px;
     color: #fff;
+    color: #d8d87d;
+    transition: all 0.3s;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
     & section {
         height: 50%;
@@ -36,13 +42,14 @@ header {
     & section#appName {
         padding-left: 50px;
         font-size: 2em;
-        /* font-family: "Federant"; */
-        border-bottom: 1px solid #fff;
+        font-family: "Cinzel Decorative";
     }
 
-    & section:nth-child(2) {
+    & section#switchCenter {
         background: #7dd87e;
         text-align: center;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #555;
 
         .switch-button {
             background: rgba(255, 255, 255, 0.56);
@@ -52,7 +59,7 @@ header {
             text-align: center;
             font-size: 18px;
             letter-spacing: 1px;
-            color: #145f14;
+            color: #535353;
             position: relative;
             padding-right: 120px;
             position: relative;
@@ -120,28 +127,66 @@ header {
 main {
     overflow: hidden;
     display: flex;
+    position: relative;
+    z-index: 0;
 
     & section#fx {
-        background: blue;
         position: relative;
         width: 100%;
-        transition-property: margin-left;
+        transition-property: all;
         transition-duration: 0.3s;
         margin-left: -100%;
         flex-shrink: 0;
+
+        div.fxContainer {
+            width: 100%;
+            height: 75px;
+            border-right: 1px solid #d8d87d;
+            border-left: 1px solid #d8d87d;
+            border-bottom: 1px solid #d8d87d;
+            display: flex;
+        }
+
+        div {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        div.fxPrice {
+            justify-content: end;
+            padding-right: 15px;
+        }
+
+        div.fxIcon {
+            background: #d8d8d8;
+            justify-content: center;
+            padding: 0;
+            height: 100%;
+            margin: 0;
+            max-width: 100px;
+            border-right: 2px solid #d8d87d;
+
+            & div.fflag {
+                width: 42px !important;
+                height: 32px !important;
+            }
+        }
     }
 
     & section#crypto {
         position: relative;
         width: 100%;
-        transition-property: margin-left;
+        transition-property: all;
         transition-duration: 0.3s;
         flex-shrink: 0;
 
         div.cryptoContainer {
             width: 100%;
             height: 75px;
-            border: 1px solid #7dd87e;
+            border-right: 1px solid #7dd87e;
+            border-left: 1px solid #7dd87e;
+            border-bottom: 1px solid #7dd87e;
             display: flex;
 
             div {
@@ -151,11 +196,23 @@ main {
                 align-items: center;
             }
 
+            div.cryptoPrice {
+                justify-content: end;
+                padding-right: 15px;
+            }
+
             div.cryptoIcon {
                 background: #535353;
+                background: #989998;
                 justify-content: center;
                 padding: 0;
                 max-width: 100px;
+                border-right: 2px solid #7dd87e;
+                
+                & div.fflag {
+                    width: 42px !important;
+                    height: 32px !important;
+                }
             }
         }
     }
@@ -165,4 +222,10 @@ main {
     margin-left: 0 !important;
     transition-property: margin-left;
     transition-duration: 0.3s;
+}
+
+.switchBGColor {
+    transition-property: background;
+    transition-duration: 0.3s;
+    background: #d8d87d !important;
 }
