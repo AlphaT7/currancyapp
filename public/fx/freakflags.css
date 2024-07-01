@@ -259,21 +259,57 @@ For complete information visit: www.freakflagsprite.com
 .fflag-TV {background-position:center 52.9933%}
 .fflag-VU {background-position:left 53.215%}
 .fflag-WF {background-position:center 53.4385%}
+.fflag-AQ {background-position:center 53.6584%}
+.fflag-EU {background-position:center 53.875%}
+.fflag-JR {background-position:center 54.099%}
+.fflag-OLY {background-position:center 54.32%}
+.fflag-UN {background-position:center 54.54%}
+.fflag-TD.ff-round,
 .fflag-TD.ff-app,
+.fflag-TD.ff-sphere,
+.fflag-GN.ff-round,
 .fflag-GN.ff-app,
+.fflag-GN.ff-sphere,
+.fflag-CI.ff-round,
 .fflag-CI.ff-app,
+.fflag-CI.ff-sphere,
+.fflag-ML.ff-round,
 .fflag-ML.ff-app,
+.fflag-ML.ff-sphere,
+.fflag-NG.ff-round,
 .fflag-NG.ff-app,
+.fflag-NG.ff-sphere,
+.fflag-BE.ff-round,
 .fflag-BE.ff-app,
+.fflag-BE.ff-sphere,
+.fflag-FR.ff-round,
 .fflag-FR.ff-app,
+.fflag-FR.ff-sphere,
+.fflag-IE.ff-round,
 .fflag-IE.ff-app,
+.fflag-IE.ff-sphere,
+.fflag-IT.ff-round,
 .fflag-IT.ff-app,
-.fflag-RO.ff-app {background-size:100%  50000%}
+.fflag-IT.ff-sphere,
+.fflag-RO.ff-round,
+.fflag-RO.ff-app,
+.fflag-RO.ff-sphere {background-size:100%  50000%}
 
 .fflag.ff-sm {width: 18px;height: 11px}
 .fflag.ff-md {width: 27px;height: 17px}
 .fflag.ff-lg {width: 42px;height: 27px}
 .fflag.ff-xl {width: 60px;height: 37px}
+
+/* ff-round = circular icons */
+.ff-round {
+	background-size: 160%;
+	background-clip: content-box;
+	border-radius: 50%;
+}
+.ff-round.ff-sm {width: 12px; height: 12px}
+.ff-round.ff-md {width: 18px; height: 18px}
+.ff-round.ff-lg {width: 24px; height: 24px}
+.ff-round.ff-xl {width: 32px; height: 32px}
 
 /* ff-app = app icon look */
 .ff-app {
@@ -295,6 +331,37 @@ For complete information visit: www.freakflagsprite.com
 .ff-app.ff-md:before, .ff-app.ff-md {width: 18px; height: 18px}
 .ff-app.ff-lg:before, .ff-app.ff-lg {width: 24px; height: 24px}
 .ff-app.ff-xl:before, .ff-app.ff-xl {width: 32px; height: 32px}
+
+/* ff-sphere = spherical with specular highlight */
+.ff-sphere {
+	background-size: 160%;
+	background-clip: content-box;
+	border-radius: 50%;
+}
+.ff-sphere:before {
+	content: '';
+	display: inline-block;
+	width: inherit;
+	height: inherit;
+	position:absolute;
+	top: 0;
+	left: 0;
+	background: radial-gradient(circle at 13% 58%, rgba(255,255,255,0) 68%, rgba(255,255,255,0.6) 82%, rgba(255,255,255,1) 100%),radial-gradient(circle at 50% -34%, rgba(0,0,0,0) 85%, rgba(0,0,0,.5) 94%, rgba(0,0,0,.4) 100%), radial-gradient(circle at 26% 26%, rgba(255,255,255,1) 7%, rgba(255,263,252,.6) 7%, rgba(255,255,255,0.8) 7%, rgba(255,255,255,.1) 29%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.45) 68%, rgba(0,0,0,1) 78%)
+}
+.ff-sphere:after {
+	content: '';
+	display: inline-block;
+	width: inherit;
+	height: inherit;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 50%;
+}
+.ff-sphere.ff-sm {width: 12px; height: 12px}
+.ff-sphere.ff-md {width: 18px; height: 18px}
+.ff-sphere.ff-lg {width: 24px; height: 24px}
+.ff-sphere.ff-xl {width: 32px; height: 32px}
 
 /* ff-wave = waving flag look */
 .ff-wave:before {
