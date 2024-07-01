@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Open+Sans&display=swap');
 
 html,
@@ -19,14 +20,14 @@ div {
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
+    -webkit-user-select: none;
+    user-select: none;
+
 }
 
 header {
-    background: #325632;
-    background: #989998;
     background: #555;
     height: 150px;
-    color: #fff;
     color: #d8d87d;
     transition: all 0.3s;
     position: sticky;
@@ -43,6 +44,11 @@ header {
         padding-left: 50px;
         font-size: 2em;
         font-family: "Cinzel Decorative";
+        display: flex;
+
+        & div#installApp {
+            cursor: pointer;
+        }
     }
 
     & section#switchCenter {
@@ -100,8 +106,6 @@ header {
             position: relative;
             padding: 15px 0;
             display: block;
-            -webkit-user-select: none;
-            user-select: none;
             pointer-events: none;
         }
 
@@ -228,4 +232,10 @@ main {
     transition-property: background;
     transition-duration: 0.3s;
     background: #d8d87d !important;
+}
+
+.materialIcons {
+    font-family: "Material Icons";
+    width: 50px;
+    margin-right: 15px;
 }

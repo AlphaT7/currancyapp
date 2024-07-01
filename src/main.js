@@ -7,8 +7,25 @@ const USDollar = new Intl.NumberFormat("en-US", {
 });
 
 let pointerDown;
+let isPointerUp = true;
+let installApp;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installApp = e;
+  $("#installApp").addEventListener("pointerdown", () => {
+    if (installApp.prompt()) {
+      log(true);
+    }
+  });
+});
+
+function pointerUp() {
+  isPointerUp = true;
+}
 
 function trackPointer(e) {
+  if (pointerDown == undefined) return;
   let motionDifference = {
     x: abs(abs(e.x) - pointerDown.x),
     y: abs(abs(e.y) - pointerDown.y),
@@ -23,7 +40,10 @@ function trackPointer(e) {
   let dirRight = motionDirection.x == "right" ? true : false;
   let movement = motionDifference.x > 8 ? true : false;
 
-  if ((fx && dirRight && movement) || (!fx && !dirRight && movement)) {
+  if (
+    (fx && dirRight && movement && !isPointerUp) ||
+    (!fx && !dirRight && movement && !isPointerUp)
+  ) {
     $("#displaySwitch").checked = !$("#displaySwitch").checked;
     switchCurrency();
   }
@@ -31,6 +51,7 @@ function trackPointer(e) {
 
 function setPointer(e) {
   pointerDown = { x: e.x, y: e.y };
+  isPointerUp = false;
 }
 
 function switchCurrency() {
@@ -46,6 +67,17 @@ async function init() {
 
   getCrypto(cryptoArr);
   getFX(fxObj);
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        console.log("SW registered: ", registration);
+      })
+      .catch((registrationError) => {
+        console.log("SW registration failed: ", registrationError);
+      });
+  }
 }
 
 function getCrypto(cryptoArr) {
@@ -107,5 +139,7 @@ $("#displaySwitch").addEventListener("pointerup", switchCurrency);
 document.addEventListener("pointerdown", setPointer);
 
 document.addEventListener("pointermove", trackPointer);
+
+document.addEventListener("pointerup", pointerUp);
 
 init();

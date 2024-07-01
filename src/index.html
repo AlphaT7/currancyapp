@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency App</title>
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="apple-touch-icon" href="./apple-touch-icon">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./fx/freakflags.css">
@@ -11,7 +13,10 @@
 </head>
 <body>
     <header>
-        <section id="appName">Currency App</section>
+        <section id="appName">
+            <div>Currency App</div>
+            <div id="installApp" class="materialIcons">install_mobile</div>
+        </section>
         <section id="switchCenter">
             <div class="switch-button">
                 <input id="displaySwitch" class="switch-button-checkbox" type="checkbox"></input>
