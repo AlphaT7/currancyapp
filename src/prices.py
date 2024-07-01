@@ -1,12 +1,17 @@
 import requests
+import json
 
 def getCryptoData():
     #Crypto api request
     url = 'https://api.coincap.io/v2/assets'
     response = requests.get(url)
-    crypto_data= response.json()['data']
-    print(crypto_data)
-    return crypto_data
+    crypto_data= json.loads(response.text)
+    top_ten_crypto = ["BTC", "ETH", "USDT", "BNB", "SOL", "USDC", "XRP", "DOGE", "ADA", "TRX"]
+    top_crypto = []
+    for crypto in crypto_data['data']:
+        if crypto['symbol'] in top_ten_crypto:
+            top_crypto.append(crypto)
+    return top_crypto
 
 def getCurrencyData():
     # Currency api request
@@ -22,10 +27,8 @@ def getCurrencyData():
 
 def main():
     UIData = []
-
     UIData.append(getCryptoData())
     UIData.append(getCurrencyData())
-
     return UIData
     
 if __name__ == '__main__':
