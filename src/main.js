@@ -6,6 +6,8 @@ const USDollar = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
+// ["USD", "EUR", "JPY", "GBP", "CNH", "AUD", "CAD", "CHF", "HKD", "NZD"]
+
 let pointerDown;
 let isPointerUp = true;
 let installApp;
@@ -67,6 +69,7 @@ async function init() {
 
   getCrypto(cryptoArr);
   getFX(fxObj);
+  fillCurrencySelection(fxObj);
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
@@ -131,6 +134,21 @@ function getFX(fxObj) {
     $("#fx").innerHTML += temp;
 
     i++;
+  }
+}
+
+function fillCurrencySelection(fxObj) {
+  let cList = $("#currencyList");
+  cList.innerHTML = "";
+
+  let option = `<div>
+    <input type="radio" name="country" value="{currency}">
+  </div>`;
+
+  for (country in fxObj) {
+    let newOption = option;
+    newOption.replaceAll("{currency}", country);
+    cList.innerHTML += option;
   }
 }
 
