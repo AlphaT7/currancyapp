@@ -38,6 +38,8 @@ header {
         height: 50%;
         display: flex;
         align-items: center;
+        justify-content: center;
+        position: relative;
     }
 
     & section#appName {
@@ -57,25 +59,10 @@ header {
         border-bottom: 1px solid #555;
         -webkit-tap-highlight-color: transparent;
         display: flex;
-        align-items: center;
-        justify-content: center;
         flex-direction: column;
+        align-items: start;
 
-        .switch-button {
-            background: rgba(255, 255, 255, 0.56);
-            border-radius: 30px;
-            overflow: hidden;
-            width: 180px;
-            text-align: center;
-            font-size: 18px;
-            letter-spacing: 1px;
-            color: #535353;
-            position: relative;
-            padding-right: 90px;
-            position: relative;
-        }
-
-        .switch-button:before {
+        & .switch-button:before {
             content: "FX";
             position: absolute;
             top: 0;
@@ -90,33 +77,50 @@ header {
             padding-right: 18%;
         }
 
-        .switch-button-checkbox {
+        & .switch-button {
+            background: rgba(255, 255, 255, 0.56);
+            border-radius: 30px;
+            overflow: hidden;
+            width: 180px;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #535353;
+            padding-right: 90px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            bottom: 5px;
+
+        }
+
+        & .switch-button-checkbox {
             cursor: pointer;
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
             margin: 0;
-            paddin: 0;
+            padding: 0;
             width: 100%;
             height: 100%;
             opacity: 0;
             z-index: 2;
         }
 
-        .switch-button-checkbox:checked+.switch-button-label:before {
+        & .switch-button-checkbox:checked+.switch-button-label:before {
             transform: translateX(90px);
             transition: transform 300ms linear;
         }
 
-        .switch-button-checkbox+.switch-button-label {
+        & .switch-button-checkbox+.switch-button-label {
             position: relative;
             padding: 5px 0;
             display: block;
             pointer-events: none;
         }
 
-        .switch-button-checkbox+.switch-button-label:before {
+        & .switch-button-checkbox+.switch-button-label:before {
             content: "";
             background: #fff;
             height: 100%;
@@ -129,17 +133,54 @@ header {
             transition: transform 300ms;
         }
 
-        .switch-button-checkbox+.switch-button-label .switch-button-label-span {
+        & .switch-button-checkbox+.switch-button-label {
+            position: relative;
+            padding: 5px 0;
+            display: block;
+            pointer-events: none;
+        }
+
+        & .switch-button-checkbox+.switch-button-label:before {
+            content: "";
+            background: #fff;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 30px;
+            transform: translateX(0);
+            transition: transform 300ms;
+        }
+
+        & .switch-button-checkbox+.switch-button-label .switch-button-label-span {
             position: relative;
         }
 
-        form#currencyList {
-            width: 180px;
-            height: 20px;
-            background: #fff;
-            border: 1px solid #000;
-            margin: 5px;
-            overflow: hidden;
+        & div#currencyForm {
+            position: absolute;
+            top: 5px;
+
+            & div#currencySelection {
+                width: 180px;
+                height: 25px;
+                background: #fff;
+                display: flex;
+                color: #555;
+                border-radius: 4px;
+            }
+
+            & div#currencyList {
+                display: none;
+                width: 180px;
+                height: 350px;
+                background: #fff;
+                opacity: 0;
+                border: 1px solid #000;
+                overflow-y: scroll;
+                transition: all 1s;
+                margin-top: 3px;
+            }
         }
     }
 }
@@ -254,4 +295,12 @@ main {
     font-family: "Material Icons";
     width: 50px;
     margin-right: 15px;
+}
+
+.changeOpacity {
+    opacity: 1 !important;
+}
+
+.changeDisplay {
+    display: block !important;
 }

@@ -11,14 +11,13 @@ const USDollar = new Intl.NumberFormat("en-US", {
 let pointerDown;
 let isPointerUp = true;
 let installApp;
+let showList = false;
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   installApp = e;
   $("#installApp").addEventListener("pointerdown", () => {
-    if (installApp.prompt()) {
-      log(true);
-    }
+    installApp.prompt();
   });
 });
 
@@ -71,16 +70,16 @@ async function init() {
   getFX(fxObj);
   fillCurrencySelection(fxObj);
 
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((registration) => {
-        console.log("SW registered: ", registration);
-      })
-      .catch((registrationError) => {
-        console.log("SW registration failed: ", registrationError);
-      });
-  }
+  // if ("serviceWorker" in navigator) {
+  //   navigator.serviceWorker
+  //     .register("/sw.js")
+  //     .then((registration) => {
+  //       console.log("SW registered: ", registration);
+  //     })
+  //     .catch((registrationError) => {
+  //       console.log("SW registration failed: ", registrationError);
+  //     });
+  // }
 }
 
 function getCrypto(cryptoArr) {
@@ -152,6 +151,21 @@ function fillCurrencySelection(fxObj) {
   }
 }
 
+function showDropDown() {
+  showList = !showList;
+  if (showList) {
+    $("#currencyList").classList.toggle("changeDisplay");
+    setTimeout(() => {
+      $("#currencyList").classList.toggle("changeOpacity");
+    }, 100);
+  } else {
+    $("#currencyList").classList.toggle("changeOpacity");
+    setTimeout(() => {
+      $("#currencyList").classList.toggle("changeDisplay");
+    }, 750);
+  }
+}
+
 $("#displaySwitch").addEventListener("pointerup", switchCurrency);
 
 document.addEventListener("pointerdown", setPointer);
@@ -159,5 +173,7 @@ document.addEventListener("pointerdown", setPointer);
 document.addEventListener("pointermove", trackPointer);
 
 document.addEventListener("pointerup", pointerUp);
+
+$("#currencyId").addEventListener("pointerup", showDropDown);
 
 init();
