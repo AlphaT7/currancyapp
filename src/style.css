@@ -44,6 +44,7 @@ header {
 
     & section#appName {
         padding-left: 50px;
+        padding-right: 30px;
         font-size: 2em;
         font-family: "Cinzel Decorative";
         display: flex;
@@ -168,6 +169,21 @@ header {
                 display: flex;
                 color: #555;
                 border-radius: 4px;
+                align-items: center;
+
+                & div#selectedCurrancyFlag {
+                    width: 43px;
+                    height: 16px;
+                    margin: 0 4px;
+                }
+
+                & div#currencyId {
+                    text-align: center;
+                }
+
+                & div#dropIndicator {
+                    /* flex-shrink: 0; */
+                }
             }
 
             & div#currencyList {
@@ -293,8 +309,7 @@ main {
 
 .materialIcons {
     font-family: "Material Icons";
-    width: 50px;
-    margin-right: 15px;
+    width: 30px;
 }
 
 .changeOpacity {

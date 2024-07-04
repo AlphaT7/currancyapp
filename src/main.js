@@ -155,11 +155,13 @@ function showDropDown() {
   showList = !showList;
   if (showList) {
     $("#currencyList").classList.toggle("changeDisplay");
+    $("#dropIndicator").innerHTML = "arrow_drop_up";
     setTimeout(() => {
       $("#currencyList").classList.toggle("changeOpacity");
     }, 100);
   } else {
     $("#currencyList").classList.toggle("changeOpacity");
+    $("#dropIndicator").innerHTML = "arrow_drop_down";
     setTimeout(() => {
       $("#currencyList").classList.toggle("changeDisplay");
     }, 750);
@@ -174,6 +176,6 @@ document.addEventListener("pointermove", trackPointer);
 
 document.addEventListener("pointerup", pointerUp);
 
-$("#currencyId").addEventListener("pointerup", showDropDown);
+$("#currencySelection").addEventListener("pointerup", showDropDown);
 
 init();
