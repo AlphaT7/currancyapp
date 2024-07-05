@@ -137,17 +137,25 @@ function getFX(fxObj) {
 }
 
 function fillCurrencySelection(fxObj) {
-  let cList = $("#currencyList");
-  cList.innerHTML = "";
+  let currencyList = $("#currencyList");
+  currencyList.innerHTML = "";
 
-  let option = `<div>
-    <input type="radio" name="country" value="{currency}">
+  let option = `<div class="optionContainer">
+      <div class="flag-option fflag-[country] fflag ff-wave ff-app"></div>
+      <div class="optionCurrency">[currency]</div>
+      <input type="radio" name="country" value="[currency]" />
   </div>`;
 
-  for (country in fxObj) {
+  for (currency in fxObj) {
     let newOption = option;
-    newOption.replaceAll("{currency}", country);
-    cList.innerHTML += option;
+    let country = currency.slice(0, 2);
+    let currencyPattern = "[currency]";
+    let countryPattern = "[country]";
+
+    newOption = newOption.replaceAll(countryPattern, country);
+    newOption = newOption.replaceAll(currencyPattern, currency);
+
+    currencyList.innerHTML += newOption;
   }
 }
 
