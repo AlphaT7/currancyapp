@@ -46,8 +46,11 @@ header {
         padding-left: 50px;
         padding-right: 30px;
         font-size: 2em;
-        font-family: "Cinzel Decorative";
         display: flex;
+
+        & div:nth-child(1) {
+            font-family: "Cinzel Decorative" !important;
+        }
 
         & div#installApp {
             cursor: pointer;
@@ -170,32 +173,56 @@ header {
                 color: #555;
                 border-radius: 4px;
                 align-items: center;
+                border: 1px solid #555;
 
                 & div#selectedCurrancyFlag {
-                    width: 43px;
-                    height: 16px;
-                    margin: 0 4px;
+                    width: 40px;
+                    height: 17px;
+                    margin: 0 3px;
                 }
 
                 & div#currencyId {
                     text-align: center;
                 }
-
-                & div#dropIndicator {
-                    /* flex-shrink: 0; */
-                }
             }
 
             & div#currencyList {
+                position: absolute;
                 display: none;
                 width: 180px;
                 height: 350px;
                 background: #fff;
                 opacity: 0;
-                border: 1px solid #000;
+                border: 1px solid #555;
                 overflow-y: scroll;
                 transition: all 1s;
                 margin-top: 3px;
+                z-index: 4;
+                left: 50%;
+                border-radius: 4px;
+                transform: translate(-50%);
+
+                & div.optionContainer:nth-child(odd) {
+                    background: #e5e5b4;
+                }
+
+                & div.optionContainer {
+                    display: flex;
+                    width: 100%;
+                    height: 35px;
+                    padding: 3px;
+                    color: #555;
+
+                    & div.flag-option {
+                        width: 50px;
+                        height: 27px;
+                    }
+
+                    & div.optionCurrency {
+                        text-align: center;
+                        padding-top: 5px;
+                    }
+                }
             }
         }
     }
