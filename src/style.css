@@ -29,7 +29,6 @@ header {
     background: #555;
     height: 150px;
     color: #d8d87d;
-    transition: all 0.3s;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -109,7 +108,7 @@ header {
             width: 100%;
             height: 100%;
             opacity: 0;
-            z-index: 2;
+            z-index: 3;
         }
 
         & .switch-button-checkbox:checked+.switch-button-label:before {
@@ -186,7 +185,7 @@ header {
                 }
             }
 
-            & div#currencyList {
+            & div#listContainer {
                 position: absolute;
                 display: none;
                 width: 180px;
@@ -195,32 +194,86 @@ header {
                 opacity: 0;
                 border: 1px solid #555;
                 overflow-y: scroll;
-                transition: all 1s;
+                transition: all 0.5s;
                 margin-top: 3px;
                 z-index: 4;
                 left: 50%;
                 border-radius: 4px;
+                padding: 0;
                 transform: translate(-50%);
+                grid-template-columns: 120px 40px;
+                grid-template-rows: 27px 1fr;
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
 
-                & div.optionContainer:nth-child(odd) {
-                    background: #e5e5b4;
+                & *:focus {
+                    outline: none;
                 }
 
-                & div.optionContainer {
-                    display: flex;
-                    width: 100%;
-                    height: 35px;
+                & input#findCurrency {
+                    margin: 3px;
                     padding: 3px;
-                    color: #555;
+                    border-top: 1px solid #555;
+                    border-bottom: 1px solid #555;
+                    border-left: 1px solid #555;
+                    border-right: none;
+                    grid-area: 1 / 1 / 2 / 2;
+                    position: sticky;
+                    top: 3px;
+                    background: #fff;
+                    z-index: 1;
+                    max-height: 27px;
+                }
 
-                    & div.flag-option {
-                        width: 50px;
-                        height: 27px;
+                & div#searchIcon {
+                    grid-area: 1 / 2 / 2 / 3;
+                    color: #555;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-top: 1px solid #555;
+                    border-bottom: 1px solid #555;
+                    border-right: 1px solid #555;
+                    border-left: none;
+                    margin: 3px 3px 3px -3px;
+                    position: sticky;
+                    top: 3px;
+                    padding: 3px;
+                    width: 40px;
+                    background: #fff;
+                    z-index: 1;
+                    cursor: pointer;
+                    max-height: 27px;
+                }
+
+                & div#currencyList {
+                    grid-area: 2 / 1 / 3 / 3;
+                    padding: 3px;
+                    z-index: 0;
+                    width: 160px;
+                   
+                    & div.optionContainer:nth-child(odd) {
+                        background: #e5e5b4;
+                        padding: 3px;
                     }
 
-                    & div.optionCurrency {
-                        text-align: center;
-                        padding-top: 5px;
+                    & div.optionContainer {
+                        display: flex;
+                        height: 35px;
+                        padding: 3px;
+                        color: #555;
+                        border: 1px solid #555;
+                        margin: 2px 0;
+
+                        & div.flag-option {
+                            width: 50px;
+                            height: 27px;
+                        }
+
+                        & div.optionCurrency {
+                            text-align: center;
+                            padding-top: 3px;
+                        }
                     }
                 }
             }
@@ -341,8 +394,4 @@ main {
 
 .changeOpacity {
     opacity: 1 !important;
-}
-
-.changeDisplay {
-    display: block !important;
 }
