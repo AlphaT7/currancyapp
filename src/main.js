@@ -12,6 +12,7 @@ let pointerDown;
 let isPointerUp = true;
 let installApp;
 let showList = false;
+let apiData;
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
@@ -62,13 +63,13 @@ function switchCurrency() {
 
 async function init() {
   let response = await fetch("./temp.json");
-  let mainArr = await response.json();
-  let cryptoArr = mainArr[0];
-  let fxObj = mainArr[1].rates;
+  apiData = await response.json();
+  let cryptoArr = apiData[0];
+  let fxObj = apiData[1].rates;
 
   getCrypto(cryptoArr);
   getFX(fxObj);
-  fillCurrencySelection(fxObj);
+  filterCurrencyList();
 
   // if ("serviceWorker" in navigator) {
   //   navigator.serviceWorker
@@ -136,17 +137,16 @@ function getFX(fxObj) {
   }
 }
 
-function fillCurrencySelection(fxObj) {
+async function fillCurrencySelection(filteredList) {
   let currencyList = $("#currencyList");
   currencyList.innerHTML = "";
 
-  let option = `<div class="optionContainer">
-      <div class="flag-option fflag-[country] fflag ff-wave ff-app"></div>
-      <div class="optionCurrency">[currency]</div>
-      <input type="radio" name="country" value="[currency]" />
+  let option = `<div data-currency="[currency]" class="optionContainer">
+      <div data-currency="[currency]" class="flag-option fflag-[country] fflag ff-wave ff-app"></div>
+      <div data-currency="[currency]" class="optionCurrency">[currency]</div>
   </div>`;
 
-  for (currency in fxObj) {
+  for await (currency of filteredList) {
     let newOption = option;
     let country = currency.slice(0, 2);
     let currencyPattern = "[currency]";
@@ -157,23 +157,56 @@ function fillCurrencySelection(fxObj) {
 
     currencyList.innerHTML += newOption;
   }
+
+  document.querySelectorAll(".optionContainer").forEach((el) => {
+    el.addEventListener("pointerdown", setCurrencyBase);
+  });
 }
 
 function showDropDown() {
   showList = !showList;
   if (showList) {
-    $("#currencyList").classList.toggle("changeDisplay");
+    $("#listContainer").style.display = "grid";
     $("#dropIndicator").innerHTML = "arrow_drop_up";
     setTimeout(() => {
-      $("#currencyList").classList.toggle("changeOpacity");
-    }, 100);
+      $("#listContainer").classList.toggle("changeOpacity");
+      $("#findCurrency").focus();
+    }, 50);
   } else {
-    $("#currencyList").classList.toggle("changeOpacity");
+    $("#listContainer").classList.toggle("changeOpacity");
     $("#dropIndicator").innerHTML = "arrow_drop_down";
     setTimeout(() => {
-      $("#currencyList").classList.toggle("changeDisplay");
-    }, 750);
+      $("#listContainer").style.display = "none";
+    }, 300);
   }
+}
+
+async function filterCurrencyList() {
+  let conditions = new RegExp(/^[A-Za-z]{0,3}$/, "gi");
+  let userInput = $("#findCurrency").value;
+  if (!conditions.test(userInput))
+    $("#findCurrency").value = userInput.slice(0, userInput.length - 1);
+
+  let filter = new RegExp("^" + $("#findCurrency").value, "gi");
+  let currencyList = Object.entries(apiData[1].rates).map((arr) => arr[0]);
+
+  let filteredList = currencyList.filter((currency) => {
+    filter.lastIndex = 0; // necessary to reset the ".test()" to start at index 0 of userInput regular expression;
+    if (filter.test(currency)) return currency;
+  });
+
+  await fillCurrencySelection(filteredList);
+}
+
+function setCurrencyBase(e) {
+  let selection = e.target.dataset.currency;
+
+  $("#currencyId").innerText = selection;
+  $("#selectedCurrancyFlag").removeAttribute("class");
+  $("#selectedCurrancyFlag").className = `flag-option fflag-${selection.slice(
+    0,
+    2
+  )} fflag ff-wave ff-app`;
 }
 
 $("#displaySwitch").addEventListener("pointerup", switchCurrency);
@@ -185,5 +218,9 @@ document.addEventListener("pointermove", trackPointer);
 document.addEventListener("pointerup", pointerUp);
 
 $("#currencySelection").addEventListener("pointerup", showDropDown);
+
+$("#findCurrency").addEventListener("input", filterCurrencyList);
+
+$("#findCurrency").addEventListener("blur", showDropDown);
 
 init();

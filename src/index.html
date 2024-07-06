@@ -24,11 +24,15 @@
                     <div id="currencyId">USD</div>
                     <div id="dropIndicator" class="materialIcons">arrow_drop_down</div>
                 </div>
-                <div id="currencyList"></div>
+                <div id="listContainer">
+                    <input type="text" id="findCurrency" placeholder="Search [A-Za-z]" autocomplete="off" />
+                    <div id="searchIcon" class="materialIcons">search</div>
+                    <div id="currencyList"></div>
+                </div>
             </div>
             <div class="switch-button">
                 <input id="displaySwitch" class="switch-button-checkbox" type="checkbox" />
-                <label class="switch-button-label" for=""><span class="switch-button-label-span">Crypto</span></label>
+                <label class="switch-button-label" for="displaySwitch"><span class="switch-button-label-span">Crypto</span></label>
             </div>
         </section>
     </header>
