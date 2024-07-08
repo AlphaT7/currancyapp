@@ -209,18 +209,20 @@ function setCurrencyBase(e) {
   )} fflag ff-wave ff-app`;
 }
 
-$("#displaySwitch").addEventListener("pointerup", switchCurrency);
+document.addEventListener("DOMContentLoaded", () => {
+  $("#displaySwitch").addEventListener("pointerup", switchCurrency);
 
-document.addEventListener("pointerdown", setPointer);
+  document.addEventListener("pointerdown", setPointer);
 
-document.addEventListener("pointermove", trackPointer);
+  document.addEventListener("pointermove", trackPointer);
 
-document.addEventListener("pointerup", pointerUp);
+  document.addEventListener("pointerup", pointerUp);
 
-$("#currencySelection").addEventListener("pointerup", showDropDown);
+  $("#currencySelection").addEventListener("pointerup", showDropDown);
 
-$("#findCurrency").addEventListener("input", filterCurrencyList);
+  $("#findCurrency").addEventListener("input", filterCurrencyList);
 
-$("#findCurrency").addEventListener("blur", showDropDown);
+  $("#findCurrency").addEventListener("blur", showDropDown);
 
-init();
+  init();
+});
