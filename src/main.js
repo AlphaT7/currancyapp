@@ -62,7 +62,7 @@ function switchCurrency() {
 }
 
 async function init() {
-  let response = await fetch("./temp.json");
+  let response = await fetch("./static/temp.json");
   apiData = await response.json();
   let cryptoArr = apiData[0];
   let fxObj = apiData[1].rates;
@@ -96,7 +96,9 @@ function getCrypto(cryptoArr) {
     let temp = cryptoHTML;
     temp = temp.replace(
       "{icon}",
-      `<img src='${"./crypto/" + crypto.symbol.toLowerCase() + ".png"}'/>`
+      `<img src='${
+        "./static/crypto/" + crypto.symbol.toLowerCase() + ".png"
+      }'/>`
     );
 
     temp = temp.replace("{name}", crypto.name);
