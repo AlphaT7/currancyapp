@@ -105,7 +105,7 @@ function getCrypto(cryptoArr) {
 
     temp = temp.replace("{price}", `$${USDollar.format(+crypto.priceUsd)}`);
 
-    $("#crypto").innerHTML += temp;
+    $("#c2").innerHTML += temp;
   }
 }
 
@@ -133,7 +133,7 @@ function getFX(fxObj) {
 
     temp = temp.replace("{price}", `$${USDollar.format(fxObj[fx])}`);
 
-    $("#fx").innerHTML += temp;
+    $("#c1").innerHTML += temp;
 
     i++;
   }
@@ -211,20 +211,34 @@ function setCurrencyBase(e) {
   )} fflag ff-wave ff-app`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  $("#displaySwitch").addEventListener("pointerup", switchCurrency);
+function test() {
+  const options = { method: "GET", headers: { accept: "application/json" } };
 
-  document.addEventListener("pointerdown", setPointer);
+  fetch(
+    "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?apiKey=v4hhypQTKvSmCUaME_6x_Yyai6ReULsM",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch((err) => console.error(err));
+}
 
-  document.addEventListener("pointermove", trackPointer);
+test();
 
-  document.addEventListener("pointerup", pointerUp);
+// document.addEventListener("DOMContentLoaded", () => {
+//   $("#displaySwitch").addEventListener("pointerup", switchCurrency);
 
-  $("#currencySelection").addEventListener("pointerup", showDropDown);
+//   document.addEventListener("pointerdown", setPointer);
 
-  $("#findCurrency").addEventListener("input", filterCurrencyList);
+//   document.addEventListener("pointermove", trackPointer);
 
-  $("#findCurrency").addEventListener("blur", showDropDown);
+//   document.addEventListener("pointerup", pointerUp);
 
-  init();
-});
+//   $("#currencySelection").addEventListener("pointerup", showDropDown);
+
+//   $("#findCurrency").addEventListener("input", filterCurrencyList);
+
+//   $("#findCurrency").addEventListener("blur", showDropDown);
+
+//   init();
+// });
