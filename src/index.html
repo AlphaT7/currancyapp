@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency App</title>
-    <link rel="manifest" href="./site.webmanifest">
-    <link rel="apple-touch-icon" href="./apple-touch-icon">
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="./static/site.webmanifest">
+    <link rel="apple-touch-icon" href="./static/apple-touch-icon">
+    <link rel="shortcut icon" href="./static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./static/fx/freakflags.css">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./fx/freakflags.css">
-    <script src="./main.js" defer></script>
+    <script type="module" src="./main.js"></script>
 </head>
 <body>
     <header>
@@ -18,7 +21,7 @@
             <div id="installApp" class="materialIcons">install_mobile</div>
         </section>
         <section id="switchCenter">
-            <div id="currencyForm">
+            <!-- <div id="currencyForm"> -->
                 <div id="currencySelection">
                     <div id="selectedCurrancyFlag" class="fflag-US fflag ff-wave ff-app"></div>
                     <div id="currencyId">USD</div>
@@ -29,17 +32,49 @@
                     <div id="searchIcon" class="materialIcons">search</div>
                     <div id="currencyList"></div>
                 </div>
-            </div>
-            <div class="switch-button">
+            <!-- </div> -->
+            <!-- <div class="switch-button">
                 <input id="displaySwitch" class="switch-button-checkbox" type="checkbox" />
                 <label class="switch-button-label" for="displaySwitch"><span class="switch-button-label-span">Crypto</span></label>
-            </div>
+            </div> -->
         </section>
     </header>
     <main>
-        <section id="fx"></section>
-        <section id="crypto"></section>
+        <!-- <section id="fx"></section> -->
+        <!-- <section id="crypto"></section> -->
+        <section class="container">
+            <input type="radio" id="tab1" name="tab" checked>
+            <label for="tab1"><i class="fa-solid fa-dollar-sign"></i> Forex</label>
+            <input type="radio" id="tab2" name="tab">
+            <label for="tab2"><i class="fa-brands fa-btc"></i> Crypto</label>
+            <input type="radio" id="tab3" name="tab">
+            <label for="tab3"><i class="fa-solid fa-chart-line"></i> Stocks</label>
+            <input type="radio" id="tab4" name="tab">
+            <label for="tab4"><i class="fa-solid fa-chart-pie"></i> Metals</label>
+            <div class="line"></div>
+            <div class="content-container">
+                <div class="content" id="c1">
+                    <h3>Forex Data</h3>
+                    <p>Forex Data Here</p>
+                </div>
+                <div class="content" id="c2">
+                    <h3>Crypto</h3>
+                    <p>Crypto Data Here</p>
+                </div>
+                <div class="content" id="c3">
+                    <h3>Stocks</h3>
+                    <p>Stocks Data Here</p>
+                </div>
+                <div class="content" id="c4">
+                    <h3>Metals</h3>
+                    <p>Metals Data Here</p>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer>Footer</footer>
+
+    <footer>
+        Developed by Jamison Winters & Christ Mboungou
+    </footer>
 </body>
 </html>

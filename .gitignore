@@ -1,6 +1,3 @@
-/node_modules
-/dist
-.venv/Include/*
-.venv/Lib/*
-.venv/Scripts/*
-.venv/pyvenv.cfg
+/node_modules/*
+/dist/*
+/.venv/*

@@ -17,17 +17,19 @@ def getCurrencyData():
     url = 'https://open.er-api.com/v6/latest/USD'
     response = requests.get(url)
     currency_data = json.loads(response.text)
-    top_ten_currency = ["USD", "EUR", "JPY", "GBP", "CNH", "AUD", "CAD", "CHF", "HKD", "NZD"]
-    top_currency = []
-    for currency in currency_data['rates']:
+    top_ten_currency = ["USD", "EUR", "JPY", "GBP", "CNY", "AUD", "CAD", "CHF", "HKD", "NZD"]
+    top_currency = {}
+    new_currency_data = currency_data['rates']
+    for currency, price in new_currency_data.items():
         if currency in top_ten_currency:
-            top_currency.append(currency)
+            top_currency[currency] = price
     return top_currency
 
 def main():
     UIData = []
     UIData.append(getCryptoData())
     UIData.append(getCurrencyData())
+    print(UIData)
     return UIData
     
 if __name__ == '__main__':
