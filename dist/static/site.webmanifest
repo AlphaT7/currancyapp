@@ -1,0 +1,33 @@
+{
+  "theme_color": "#d8d87d",
+  "background_color": "#989998",
+  "display_override": ["fullscreen", "minimal-ui"],
+  "display": "standalone",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Currency App",
+  "short_name": "Currency App",
+  "description": "A simple application for viewing FX/Crypto values.",
+  "id": "/",
+  "icons": [
+    {
+      "src": "./maskable-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./form_factorNarrow.png",
+      "sizes": "200x295",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "./form_factorWide.png",
+      "sizes": "700x710",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}
