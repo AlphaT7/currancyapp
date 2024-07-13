@@ -9,6 +9,8 @@ body {
     margin: 0;
     box-sizing: border-box;
     background: linear-gradient(45deg, #000000, #335c85);
+    display: flex;
+    flex-direction: column;
 }
 
 header,
@@ -23,7 +25,6 @@ div {
     margin: 0 auto;
     -webkit-user-select: none;
     user-select: none;
-
 }
 
 header {
@@ -63,7 +64,6 @@ header {
         height: 25%;
         background: rgba(255,255,255, 0);
         border-top: 2px solid #d8d87d;
-        border-bottom: 2px solid transparent;
         -webkit-tap-highlight-color: transparent;
         display: flex;
         justify-content: end;
@@ -173,10 +173,9 @@ header {
                 background: #fff;
                 display: flex;
                 color: #555;
-                border-radius: 4px;
                 align-items: center;
-                border: 1px solid #555;
-                margin: 0 10px;
+                border: 1px solid #d8d87d;
+                margin: 0;
 
                 & div#selectedCurrancyFlag {
                     width: 40px;
@@ -186,6 +185,15 @@ header {
 
                 & div#currencyId {
                     text-align: center;
+                }
+
+                & div#dropIndicator {
+                    /* background: #f4f4f4; */
+                    background: #d7d7d7;
+                    color: #555;
+                    /* color: #fff; */
+                    height: 100%;
+                    padding: 3px;
                 }
             }
 
@@ -290,6 +298,7 @@ main {
     display: flex;
     position: relative;
     z-index: 0;
+    flex-grow: 1;
     /* border-top: 2px solid #d8d87d;
     border-bottom: 2px solid #d8d87d; */
 /* 
@@ -382,11 +391,10 @@ main {
 
     & section.container {
         font-size: 0;
-        overflow: hidden;
         margin: 0 auto;
-        /* border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px; */
-    
+        height: 100%;
+        border-top: 5px solid transparent;
+        
         & input {
             display: none;
         }
@@ -394,8 +402,19 @@ main {
         & input:checked+label {
             background: #c9c9c9;
             color: #333;
+            border-right: 1px solid #fff;
+            border-left: 1px solid #fff;
         }
-    
+
+        & input:checked+label::before {
+            position: absolute;
+            background: #c9c9c9;
+            display: block;
+            content: "";
+            height: 5px;
+            top: -5px;
+        }
+
         & input#tab1:checked~.line {
             left: 0% !important;
         }
@@ -429,6 +448,7 @@ main {
         }
     
         & label {
+            box-sizing: border-box;
             display: inline-block;
             font-size: 16px;
             height: 36px;
@@ -440,10 +460,25 @@ main {
             color: #555;
             color: #fff;
             position: relative;
-            transition: 0.85s background ease;
+            transition: 0.25s background ease;
             cursor: pointer;
         }
-    
+
+        & label::before {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 100%;
+            height: 0px;
+            background: #b1b1b1;
+            top: 0px;
+            left: -1px;
+            border-top: 1px solid #fff;
+            border-right: 1px solid #fff;
+            border-left: 1px solid #fff;
+            transition: all .25s ease;
+        }
+
         & label::after {
             content: "";
             height: 2px;
@@ -452,14 +487,14 @@ main {
             display: block;
             background: #555;
             bottom: 0;
-            opacity: 1;
+            opacity: 0;
             left: 0;
             transition: 0.25s ease;
         }
     
-        /* & label:hover::after {
+        & label:hover::after {
             opacity: 1;
-        } */
+        }
     
         & .line {
             position: absolute;
@@ -469,18 +504,19 @@ main {
             background: #1e88e5;
             background: #fff;
             width: 25%;
-            top: 34px;
+            top: 39px;
             left: 0;
             transition: 0.25s ease;
-            box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 5px 3px rgba(255, 255, 255, .75);
             z-index: 5;
         }
-    
+
         & .content-container {
             background: #c9c9c9;
             position: relative;
-            height: 100px;
+            height: calc(100% - 36px);
             font-size: 16px;
+            border: 1px solid #fff;
         }
     
         & .content-container .content {
