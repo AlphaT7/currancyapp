@@ -400,19 +400,32 @@ main {
         }
     
         & input:checked+label {
-            background: #c9c9c9;
-            color: #333;
+            background: #555;
+            /* color: #333; */
             border-right: 1px solid #fff;
             border-left: 1px solid #fff;
+            border-bottom: 1px solid transparent;
         }
 
         & input:checked+label::before {
             position: absolute;
-            background: #c9c9c9;
+            background: #555;
             display: block;
             content: "";
             height: 5px;
             top: -5px;
+        }
+
+        & input:checked+label::after {
+            content: "";
+            height: 6px;
+            position: absolute;
+            display: block;
+            background: #555;
+            bottom: -7px;
+            opacity: 1;
+            left: -1px;
+            transition: 0.25s ease;
         }
 
         & input#tab1:checked~.line {
@@ -455,22 +468,25 @@ main {
             line-height: 36px;
             width: 25%;
             text-align: center;
-            background: #f4f4f4;
-            background: #b1b1b1;
+            /* background: #f4f4f4; */
+            /* background: #b1b1b1; */
             color: #555;
             color: #fff;
             position: relative;
             transition: 0.25s background ease;
             cursor: pointer;
+            border-bottom: 1px solid #fff;
+            z-index: 5;
+ 
         }
 
         & label::before {
             position: absolute;
             display: block;
             content: "";
-            width: 100%;
+            width: calc(100% - 0px);
             height: 0px;
-            background: #b1b1b1;
+            /* background: #b1b1b1; */
             top: 0px;
             left: -1px;
             border-top: 1px solid #fff;
@@ -481,23 +497,27 @@ main {
 
         & label::after {
             content: "";
-            height: 2px;
-            width: 100%;
+            height: 0px;
+            width: calc(100% - 0px);
             position: absolute;
             display: block;
-            background: #555;
+            /* background: #b1b1b1; */
+            border-bottom: 1px solid #fff;
+            border-right: 1px solid #fff;
+            border-left: 1px solid #fff;
             bottom: 0;
             opacity: 0;
             left: 0;
             transition: 0.25s ease;
         }
     
-        & label:hover::after {
+        /* & label:hover::after {
             opacity: 1;
-        }
+        } */
     
         & .line {
             position: absolute;
+            display: none;
             height: 2px;
             background: #d8d87d;
             background: #335B84;
@@ -516,7 +536,9 @@ main {
             position: relative;
             height: calc(100% - 36px);
             font-size: 16px;
-            border: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
         }
     
         & .content-container .content {
