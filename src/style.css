@@ -8,7 +8,8 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background: linear-gradient(45deg, #000000, #335c85);
+    background: linear-gradient(45deg, #000000, 30%, #335c85);
+    /* background: linear-gradient(45deg, #000000, 40%, #48B); */
     display: flex;
     flex-direction: column;
 }
@@ -67,229 +68,129 @@ header {
         -webkit-tap-highlight-color: transparent;
         display: flex;
         justify-content: end;
-/* 
-        & .switch-button:before {
-            content: "FX";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            width: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: end;
-            z-index: 3;
-            pointer-events: none;
-            padding-right: 18%;
-        }
 
-        & .switch-button {
-            background: rgba(255, 255, 255, 0.56);
-            border-radius: 30px;
-            overflow: hidden;
+        & div#currencySelection {
             width: 180px;
-            text-align: center;
-            font-size: 18px;
-            letter-spacing: 1px;
-            color: #535353;
-            padding-right: 90px;
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, 0);
-            bottom: 5px;
-
-        }
-
-        & .switch-button-checkbox {
-            cursor: pointer;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
+            height: 25px;
+            background: #fff;
+            display: flex;
+            color: #555;
+            align-items: center;
+            border: 1px solid #d8d87d;
             margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            z-index: 3;
-        }
 
-        & .switch-button-checkbox:checked+.switch-button-label:before {
-            transform: translateX(90px);
-            transition: transform 300ms linear;
-        }
+            & div#selectedCurrancyFlag {
+                width: 40px;
+                height: 17px;
+                margin: 0 3px;
+            }
 
-        & .switch-button-checkbox+.switch-button-label {
-            position: relative;
-            padding: 5px 0;
-            display: block;
-            pointer-events: none;
-        }
+            & div#currencyId {
+                text-align: center;
+            }
 
-        & .switch-button-checkbox+.switch-button-label:before {
-            content: "";
-            background: #fff;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            border-radius: 30px;
-            transform: translateX(0);
-            transition: transform 300ms;
-        }
-
-        & .switch-button-checkbox+.switch-button-label {
-            position: relative;
-            padding: 5px 0;
-            display: block;
-            pointer-events: none;
-        }
-
-        & .switch-button-checkbox+.switch-button-label:before {
-            content: "";
-            background: #fff;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            border-radius: 30px;
-            transform: translateX(0);
-            transition: transform 300ms;
-        }
-
-        & .switch-button-checkbox+.switch-button-label .switch-button-label-span {
-            position: relative;
-        } */
-
-        /* & div#currencyForm {
-            position: absolute;
-            top: 5px; */
-
-            & div#currencySelection {
-                width: 180px;
-                height: 25px;
-                background: #fff;
-                display: flex;
+            & div#dropIndicator {
+                /* background: #f4f4f4; */
+                background: #d7d7d7;
                 color: #555;
-                align-items: center;
-                border: 1px solid #d8d87d;
-                margin: 0;
+                /* color: #fff; */
+                height: 100%;
+                padding: 3px;
+            }
+        }
 
-                & div#selectedCurrancyFlag {
-                    width: 40px;
-                    height: 17px;
-                    margin: 0 3px;
-                }
+        & div#listContainer {
+            position: absolute;
+            display: none;
+            width: 180px;
+            height: 350px;
+            background: #fff;
+            opacity: 0;
+            border: 1px solid #555;
+            overflow-y: scroll;
+            transition: all 0.5s;
+            margin-top: 3px;
+            z-index: 4;
+            left: 50%;
+            border-radius: 4px;
+            padding: 0;
+            transform: translate(-50%);
+            grid-template-columns: 120px 40px;
+            grid-template-rows: 27px 1fr;
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
 
-                & div#currencyId {
-                    text-align: center;
-                }
-
-                & div#dropIndicator {
-                    /* background: #f4f4f4; */
-                    background: #d7d7d7;
-                    color: #555;
-                    /* color: #fff; */
-                    height: 100%;
-                    padding: 3px;
-                }
+            & *:focus {
+                outline: none;
             }
 
-            & div#listContainer {
-                position: absolute;
-                display: none;
-                width: 180px;
-                height: 350px;
+            & input#findCurrency {
+                margin: 3px;
+                padding: 3px;
+                border-top: 1px solid #555;
+                border-bottom: 1px solid #555;
+                border-left: 1px solid #555;
+                border-right: none;
+                grid-area: 1 / 1 / 2 / 2;
+                position: sticky;
+                top: 3px;
                 background: #fff;
-                opacity: 0;
-                border: 1px solid #555;
-                overflow-y: scroll;
-                transition: all 0.5s;
-                margin-top: 3px;
-                z-index: 4;
-                left: 50%;
-                border-radius: 4px;
-                padding: 0;
-                transform: translate(-50%);
-                grid-template-columns: 120px 40px;
-                grid-template-rows: 27px 1fr;
-                grid-column-gap: 0px;
-                grid-row-gap: 0px;
+                z-index: 1;
+                max-height: 27px;
+            }
 
-                & *:focus {
-                    outline: none;
-                }
+            & div#searchIcon {
+                grid-area: 1 / 2 / 2 / 3;
+                color: #555;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-top: 1px solid #555;
+                border-bottom: 1px solid #555;
+                border-right: 1px solid #555;
+                border-left: none;
+                margin: 3px 3px 3px -3px;
+                position: sticky;
+                top: 3px;
+                padding: 3px;
+                width: 40px;
+                background: #fff;
+                z-index: 1;
+                cursor: pointer;
+                max-height: 27px;
+            }
 
-                & input#findCurrency {
-                    margin: 3px;
+            & div#currencyList {
+                grid-area: 2 / 1 / 3 / 3;
+                padding: 3px;
+                z-index: 0;
+                width: 160px;
+                
+                & div.optionContainer:nth-child(odd) {
+                    background: #e5e5b4;
                     padding: 3px;
-                    border-top: 1px solid #555;
-                    border-bottom: 1px solid #555;
-                    border-left: 1px solid #555;
-                    border-right: none;
-                    grid-area: 1 / 1 / 2 / 2;
-                    position: sticky;
-                    top: 3px;
-                    background: #fff;
-                    z-index: 1;
-                    max-height: 27px;
                 }
 
-                & div#searchIcon {
-                    grid-area: 1 / 2 / 2 / 3;
-                    color: #555;
+                & div.optionContainer {
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-top: 1px solid #555;
-                    border-bottom: 1px solid #555;
-                    border-right: 1px solid #555;
-                    border-left: none;
-                    margin: 3px 3px 3px -3px;
-                    position: sticky;
-                    top: 3px;
+                    height: 35px;
                     padding: 3px;
-                    width: 40px;
-                    background: #fff;
-                    z-index: 1;
-                    cursor: pointer;
-                    max-height: 27px;
-                }
+                    color: #555;
+                    border: 1px solid #555;
+                    margin: 2px 0;
 
-                & div#currencyList {
-                    grid-area: 2 / 1 / 3 / 3;
-                    padding: 3px;
-                    z-index: 0;
-                    width: 160px;
-                   
-                    & div.optionContainer:nth-child(odd) {
-                        background: #e5e5b4;
-                        padding: 3px;
+                    & div.flag-option {
+                        width: 50px;
+                        height: 27px;
                     }
 
-                    & div.optionContainer {
-                        display: flex;
-                        height: 35px;
-                        padding: 3px;
-                        color: #555;
-                        border: 1px solid #555;
-                        margin: 2px 0;
-
-                        & div.flag-option {
-                            width: 50px;
-                            height: 27px;
-                        }
-
-                        & div.optionCurrency {
-                            text-align: center;
-                            padding-top: 3px;
-                        }
+                    & div.optionCurrency {
+                        text-align: center;
+                        padding-top: 3px;
                     }
                 }
             }
-        /* } */
+        }
     }
 }
 
@@ -299,137 +200,18 @@ main {
     position: relative;
     z-index: 0;
     flex-grow: 1;
-    /* border-top: 2px solid #d8d87d;
-    border-bottom: 2px solid #d8d87d; */
-/* 
-    & section#fx {
-        position: relative;
-        width: 100%;
-        transition-property: all;
-        transition-duration: 0.3s;
-        margin-left: -100%;
-        flex-shrink: 0;
-
-        div.fxContainer {
-            width: 100%;
-            height: 75px;
-            border-right: 1px solid #d8d87d;
-            border-left: 1px solid #d8d87d;
-            border-bottom: 1px solid #d8d87d;
-            display: flex;
-        }
-
-        div {
-            justify-content: center;
-            display: flex;
-            align-items: center;
-        }
-
-        div.fxPrice {
-            justify-content: end;
-            padding-right: 15px;
-        }
-
-        div.fxIcon {
-            background: #d8d8d8;
-            justify-content: center;
-            padding: 0;
-            height: 100%;
-            margin: 0;
-            max-width: 100px;
-            border-right: 2px solid #d8d87d;
-
-            & div.fflag {
-                width: 42px !important;
-                height: 32px !important;
-            }
-        }
-    }
-
-    & section#crypto {
-        position: relative;
-        width: 100%;
-        transition-property: all;
-        transition-duration: 0.3s;
-        flex-shrink: 0;
-
-        div.cryptoContainer {
-            width: 100%;
-            height: 75px;
-            border-right: 1px solid #7dd87e;
-            border-left: 1px solid #7dd87e;
-            border-bottom: 1px solid #7dd87e;
-            display: flex;
-
-            div {
-                padding-left: 15px;
-                text-align: left;
-                display: flex;
-                align-items: center;
-            }
-
-            div.cryptoPrice {
-                justify-content: end;
-                padding-right: 15px;
-            }
-
-            div.cryptoIcon {
-                background: #535353;
-                background: #989998;
-                justify-content: center;
-                padding: 0;
-                max-width: 100px;
-                border-right: 2px solid #7dd87e;
-                
-                & div.fflag {
-                    width: 42px !important;
-                    height: 32px !important;
-                }
-            }
-        }
-    } */
 
     & section.container {
         font-size: 0;
         margin: 0 auto;
         height: 100%;
-        border-top: 5px solid transparent;
         
         & input {
             display: none;
         }
     
-        & input:checked+label {
-            background: #555;
-            /* color: #333; */
-            border-right: 1px solid #fff;
-            border-left: 1px solid #fff;
-            border-bottom: 1px solid transparent;
-        }
-
-        & input:checked+label::before {
-            position: absolute;
-            background: #555;
-            display: block;
-            content: "";
-            height: 5px;
-            top: -5px;
-        }
-
-        & input:checked+label::after {
-            content: "";
-            height: 6px;
-            position: absolute;
-            display: block;
-            background: #555;
-            bottom: -7px;
-            opacity: 1;
-            left: -1px;
-            transition: 0.25s ease;
-        }
-
         & input#tab1:checked~.line {
-            left: 0% !important;
+            left: 7.5% !important;
         }
     
         & input#tab1:checked~.content-container #c1 {
@@ -437,7 +219,7 @@ main {
         }
     
         & input#tab2:checked~.line {
-            left: 25% !important;
+            left: 32.5% !important;
         }
     
         & input#tab2:checked~.content-container #c2 {
@@ -445,7 +227,7 @@ main {
         }
     
         & input#tab3:checked~.line {
-            left: 50% !important;
+            left: 57.5% !important;
         }
     
         & input#tab3:checked~.content-container #c3 {
@@ -453,7 +235,7 @@ main {
         }
     
         & input#tab4:checked~.line {
-            left: 75% !important;
+            left: 82.5% !important;
         }
     
         & input#tab4:checked~.content-container #c4 {
@@ -468,9 +250,6 @@ main {
             line-height: 36px;
             width: 25%;
             text-align: center;
-            /* background: #f4f4f4; */
-            /* background: #b1b1b1; */
-            color: #555;
             color: #fff;
             position: relative;
             transition: 0.25s background ease;
@@ -479,52 +258,34 @@ main {
             z-index: 5;
  
         }
-
-        & label::before {
-            position: absolute;
-            display: block;
-            content: "";
-            width: calc(100% - 0px);
-            height: 0px;
-            /* background: #b1b1b1; */
-            top: 0px;
-            left: -1px;
-            border-top: 1px solid #fff;
-            border-right: 1px solid #fff;
-            border-left: 1px solid #fff;
-            transition: all .25s ease;
-        }
-
+/* 
         & label::after {
             content: "";
             height: 0px;
-            width: calc(100% - 0px);
+            width: 100%;
             position: absolute;
             display: block;
-            /* background: #b1b1b1; */
             border-bottom: 1px solid #fff;
-            border-right: 1px solid #fff;
-            border-left: 1px solid #fff;
             bottom: 0;
             opacity: 0;
             left: 0;
             transition: 0.25s ease;
         }
     
-        /* & label:hover::after {
+        & label:hover::after {
             opacity: 1;
         } */
     
         & .line {
             position: absolute;
-            display: none;
-            height: 2px;
+            display: block;
+            height: 1px;
             background: #d8d87d;
             background: #335B84;
             background: #1e88e5;
             background: #fff;
-            width: 25%;
-            top: 39px;
+            width: 10%;
+            top: 35px;
             left: 0;
             transition: 0.25s ease;
             box-shadow: 0px 0px 5px 3px rgba(255, 255, 255, .75);
@@ -532,13 +293,9 @@ main {
         }
 
         & .content-container {
-            background: #c9c9c9;
             position: relative;
             height: calc(100% - 36px);
             font-size: 16px;
-            border-bottom: 1px solid #fff;
-            border-left: 1px solid #fff;
-            border-right: 1px solid #fff;
         }
     
         & .content-container .content {
@@ -548,7 +305,7 @@ main {
             top: 0;
             opacity: 0;
             transition: 0.25s ease;
-            color: #333;
+            color: #fff;
         }
     
         & .content-container .content h3 {
@@ -578,7 +335,6 @@ footer {
     justify-content: center;
     color: #fff;
     border-top: 2px solid #d8d87d;
-    /* border-bottom: 2px solid #d8d87d; */
 }
 
 .switchCurrency {
