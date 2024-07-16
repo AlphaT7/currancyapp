@@ -62,14 +62,14 @@ function switchCurrency() {
 }
 
 async function init() {
-  let response = await fetch("./static/temp.json");
+  let response = await fetch("./static/temp2.json");
   apiData = await response.json();
-  let cryptoArr = apiData[0];
-  let fxObj = apiData[1].rates;
+  let cryptoObj = apiData;
+  // let fxObj = apiData[1].rates;
 
-  getCrypto(cryptoArr);
-  getFX(fxObj);
-  filterCurrencyList();
+  getCrypto(cryptoObj);
+  // getFX(fxObj);
+  // filterCurrencyList();
 
   // if ("serviceWorker" in navigator) {
   //   navigator.serviceWorker
@@ -83,29 +83,32 @@ async function init() {
   // }
 }
 
-function getCrypto(cryptoArr) {
-  let cryptoHTML = `<div class="cryptoContainer">
-    <div class="cryptoIcon"> {icon} </div>
-    <div class="cryptoName"> {name} </div>
-    <div class="cryptoPrice"> {price} </div>
-  </div>`;
+function getCrypto(cryptoObj) {
+  let cryptoTable = `<table><caption>Historical Data</caption><thead><td>Ticker</td><td>Close Price</td><td>Time</td></thead><tbody id="cryptoTable"></tbody></table>`;
 
-  for (let i = 0; i < 10; i++) {
-    let crypto = cryptoArr[i];
+  let cryptoHTML = `<tr>{img}</tr>
+                    <tr>{ticker}</tr>
+                    <tr>{closePrice}</tr>
+                    <tr>{time}</tr>`;
 
-    let temp = cryptoHTML;
-    temp = temp.replace(
-      "{icon}",
+  let transactionArr = cryptoObj.results;
+
+  for (transaction in transactionArr) {
+    let html = cryptoHTML;
+    html = html.replace(
+      "{img}",
       `<img src='${
         "./static/crypto/" + crypto.symbol.toLowerCase() + ".png"
       }'/>`
     );
 
-    temp = temp.replace("{name}", crypto.name);
+    html = html.replace("{ticker}", cryptoObj.ticker);
 
-    temp = temp.replace("{price}", `$${USDollar.format(+crypto.priceUsd)}`);
+    html = html.replace("{price}", `$${USDollar.format(+transaction.c)}`);
 
-    $("#c2").innerHTML += temp;
+    html = html.replace("time", new Date(+transaction.t));
+
+    // $("#c2").innerHTML += html;
   }
 }
 
@@ -211,34 +214,20 @@ function setCurrencyBase(e) {
   )} fflag ff-wave ff-app`;
 }
 
-function test() {
-  const options = { method: "GET", headers: { accept: "application/json" } };
+document.addEventListener("DOMContentLoaded", () => {
+  $("#displaySwitch").addEventListener("pointerup", switchCurrency);
 
-  fetch(
-    "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?apiKey=v4hhypQTKvSmCUaME_6x_Yyai6ReULsM",
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
-}
+  document.addEventListener("pointerdown", setPointer);
 
-test();
+  document.addEventListener("pointermove", trackPointer);
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   $("#displaySwitch").addEventListener("pointerup", switchCurrency);
+  document.addEventListener("pointerup", pointerUp);
 
-//   document.addEventListener("pointerdown", setPointer);
+  $("#currencySelection").addEventListener("pointerup", showDropDown);
 
-//   document.addEventListener("pointermove", trackPointer);
+  $("#findCurrency").addEventListener("input", filterCurrencyList);
 
-//   document.addEventListener("pointerup", pointerUp);
+  $("#findCurrency").addEventListener("blur", showDropDown);
 
-//   $("#currencySelection").addEventListener("pointerup", showDropDown);
-
-//   $("#findCurrency").addEventListener("input", filterCurrencyList);
-
-//   $("#findCurrency").addEventListener("blur", showDropDown);
-
-//   init();
-// });
+  init();
+});
