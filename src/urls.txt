@@ -1,0 +1,10 @@
+type= crypto / indices / forex / metals
+range= month1 / month2 / month3
+ticker= {investment ticker}
+
+const data = fetch('https://christ.pythonanywhere.com/prices.py?type="crypto,indices,forex,metals"&range="month1"');
+
+
+click btc button
+month1 & month2 & month3 FOR BTC
+const data = fetch('https://christ.pythonanywhere.com/prices.py?ticker="BTCUSD"&type="CRYPTO"&range="month1,month2,month3"');
