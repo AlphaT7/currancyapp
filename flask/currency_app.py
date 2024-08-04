@@ -1,14 +1,16 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import prices
+import ui_returns
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    # """
-    # Home page route
-    # """
-    # if request.method == 'POST':
-    #     message = request.form['message']
-    #     return jsonify(your_message=message)
-    return render_template("index.html")
+    prices.main()
+    get_range_info = request.args.get('range')
+    print(get_range_info)
+    range_info = ui_returns.range_info(get_range_info)
+    data = []
+    data.append(range_info)
+    return render_template("index.html",data=data)

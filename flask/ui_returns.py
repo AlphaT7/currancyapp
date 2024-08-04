@@ -34,6 +34,26 @@ def ticker_info(ticker,type,range):
         table = 'MONTH3_TBL'
     cursor.execute(f'''SELECT * FROM {table} WHERE type = "{type}" and modified = "{curr_month}" and ticker = "{ticker}"''')
     rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+def range_info(range):
+    conn = sqlite3.connect('currencydb.db')
+    cursor = conn.cursor()
+    table = ''
+    types = ['CRYPTO','FOREX','STOCKS']
+    curr_month = utilities.get_date()
+    curr_month = curr_month[f'curr_month_param1']
+    for type in types:
+        if range == 'month1':
+            table = 'MONTH1_TBL'
+        elif range == 'month2':
+            table = 'MONTH2_TBL'
+        elif range ==  'month3':
+            table = 'MONTH3_TBL'
+        cursor.execute(f'''SELECT * FROM {table} WHERE type = "{type}" and modified = "{curr_month}"''')
+    rows = cursor.fetchall()
+    conn.close()
     return rows
 
 def ticker_list():

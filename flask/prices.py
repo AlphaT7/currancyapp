@@ -21,20 +21,13 @@ def getStocksData():
     insert_forex_data = Data(f_currencies,"STOCKS")
     insert_forex_data.getData()
 
-
 def main():
-
-#run utilities and check api request limits on metals 
     utilities.create_tbl_utilitily()
     utilities.create_tbl_month1()
     utilities.create_tbl_month2()
     utilities.create_tbl_month3()
-    #getCryptoData()
-    #getForexData()
-    #getStocksData()
-
-    all_tickers = ui_returns.ticker_info('ETHUSD','CRYPTO','month1')
-    ticker_list = ui_returns.ticker_list()
-    print((f'''{all_tickers}\n{ticker_list}'''))
+    getCryptoData()
+    getForexData()
+    getStocksData()
 if __name__ == '__main__':
     main()
