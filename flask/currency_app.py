@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    prices.main()
+    #prices.main()
     print('Welcome')
     return render_template("index.html")
 
