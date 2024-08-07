@@ -1,6 +1,5 @@
 // import mkcert from "vite-plugin-mkcert";
 
-// vite.config.js
 export default {
   // plugins: [mkcert()],
   root: "./src/",
@@ -12,9 +11,17 @@ export default {
     reportCompressedSize: true,
   },
   server: {
+    cors: false,
+    headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    },
+    fs: {
+      strict: false,
+    },
     https: false,
     port: 3000,
     host: true,
-    open: true,
+    // open: true,
   },
 };

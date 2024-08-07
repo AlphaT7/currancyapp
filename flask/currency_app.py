@@ -7,7 +7,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
+<<<<<<< HEAD
+    # prices.main()
+=======
     #prices.main()
+>>>>>>> 265107ad07eb55b0dc91ad3131221551277a1f5d
     print('Welcome')
     return render_template("index.html")
 

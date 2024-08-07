@@ -1,3 +1,5 @@
+import { initBackend } from "absurd-sql/dist/indexeddb-main-thread";
+
 const log = console.log.bind(console);
 const $ = document.querySelector.bind(document);
 const abs = Math.abs.bind(Math);
@@ -8,8 +10,6 @@ const USDollar = new Intl.NumberFormat("en-US", {
 
 // ["USD", "EUR", "JPY", "GBP", "CNH", "AUD", "CAD", "CHF", "HKD", "NZD"]
 
-let pointerDown;
-let isPointerUp = true;
 let installApp;
 let showList = false;
 let apiData;
@@ -22,65 +22,15 @@ window.addEventListener("beforeinstallprompt", (e) => {
   });
 });
 
-function pointerUp() {
-  isPointerUp = true;
-}
-
-function trackPointer(e) {
-  if (pointerDown == undefined) return;
-  let motionDifference = {
-    x: abs(abs(e.x) - pointerDown.x),
-    y: abs(abs(e.y) - pointerDown.y),
-  };
-
-  let motionDirection = {
-    x: pointerDown.x > e.x ? "right" : "left",
-    y: pointerDown.y > e.y ? "down" : "up",
-  };
-
-  let fx = $("#displaySwitch").checked;
-  let dirRight = motionDirection.x == "right" ? true : false;
-  let movement = motionDifference.x > 8 ? true : false;
-
-  if (
-    (fx && dirRight && movement && !isPointerUp) ||
-    (!fx && !dirRight && movement && !isPointerUp)
-  ) {
-    $("#displaySwitch").checked = !$("#displaySwitch").checked;
-    switchCurrency();
-  }
-}
-
-function setPointer(e) {
-  pointerDown = { x: e.x, y: e.y };
-  isPointerUp = false;
-}
-
-function switchCurrency() {
-  $("#fx").classList.toggle("switchCurrency");
-  $("#switchCenter").classList.toggle("switchBGColor");
-}
-
 async function init() {
-  let response = await fetch("./static/temp2.json");
-  apiData = await response.json();
-  let cryptoObj = apiData;
-  // let fxObj = apiData[1].rates;
-
-  getCrypto(cryptoObj);
-  // getFX(fxObj);
-  // filterCurrencyList();
-
-  // if ("serviceWorker" in navigator) {
-  //   navigator.serviceWorker
-  //     .register("/sw.js")
-  //     .then((registration) => {
-  //       console.log("SW registered: ", registration);
-  //     })
-  //     .catch((registrationError) => {
-  //       console.log("SW registration failed: ", registrationError);
-  //     });
-  // }
+  let worker = await new Worker(new URL("./index.worker.js", import.meta.url), {
+    type: "module",
+  });
+  initBackend(worker);
+  // setTimeout(() => {
+  // worker.postMessage("/prices/month1/");
+  // }, 1000);
+  worker.postMessage("run");
 }
 
 function getCrypto(cryptoObj) {
@@ -107,8 +57,6 @@ function getCrypto(cryptoObj) {
     html = html.replace("{price}", `$${USDollar.format(+transaction.c)}`);
 
     html = html.replace("time", new Date(+transaction.t));
-
-    // $("#c2").innerHTML += html;
   }
 }
 
@@ -215,14 +163,6 @@ function setCurrencyBase(e) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  $("#displaySwitch").addEventListener("pointerup", switchCurrency);
-
-  document.addEventListener("pointerdown", setPointer);
-
-  document.addEventListener("pointermove", trackPointer);
-
-  document.addEventListener("pointerup", pointerUp);
-
   $("#currencySelection").addEventListener("pointerup", showDropDown);
 
   $("#findCurrency").addEventListener("input", filterCurrencyList);
